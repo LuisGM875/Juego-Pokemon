@@ -8,7 +8,7 @@ $objPokemon1 = new Pokemon();
 $arreglo=[];$total = 30;
 $batallas = new Pokemon();
 
-for($i=1;$i<20;$i++){
+for($i=0;$i<20;$i++){
     $objPokemon1 -> generar($name,$tipo1,$tipo2,$nivel,$total);
     $arreglo[]= (clone $objPokemon1);
 }

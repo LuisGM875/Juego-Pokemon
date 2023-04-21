@@ -301,23 +301,22 @@ class Pokemon
 
     public function atacar2($arreglo){
         $maximo=sizeof($arreglo);
-        print_r("\n        -*- Bienvenido al coliseo pokemon -*- \n     ===========================================\n -Los pokemones que luchen se atacan a la vez, algunos pokemones realizan varios ataques al mismo enemigo. \n -Pueden ocurrir ataques en grupo.\n");
+        print_r("\n        -*- Bienvenido al coliseo pokemon -*- \n     ===========================================\n -Los pokemones que luchen se atacan a la vez, algunos pokemones realizan varios ataques al mismo enemigo. \n -Pueden ocurrir ataques en grupo a un mismo pokemon.\n");
         print_r("\n -*- Comienza el combate -*-\n     *Musica de combate*\n\n");
         while($maximo>1){
                 $index = array_rand($arreglo);
                 $pos = array_rand($arreglo);
-                if($index!==$pos && $index<$maximo && $pos<$maximo){
+                if($index!==$pos && $index<$maximo && $pos<$maximo && $arreglo[$index]->estado()){
                     $arreglo[$index]->atacar($arreglo[$pos]);
-                    $arreglo[$pos]->atacar($arreglo[$index]);
+                    if($arreglo[$pos]->estado()){
+                        $arreglo[$pos]->atacar($arreglo[$index]);
+                    }
                     if (!$arreglo[$pos]->estado()) {
                         unset($arreglo[$pos]);
                         $arreglo=array_values($arreglo);
                         $maximo=sizeof($arreglo);
                     }
-                }else{
-                    //print_r("\n".$arreglo[$index]->getNombre()." a intentado atacar a otro pero no lo logro\n");
                 }
-            //parar cuando el tamaño del arreglo se de uno
 
         }
         print_r("\n ============================ \n     ¡Ganador ".$arreglo[0]->getNombre()."! \n ============================ \n Fue el ultimo en quedar en pie \n   ¡Felicidades ".$arreglo[0]->getNombre()."!\n");
